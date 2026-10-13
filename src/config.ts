@@ -1,6 +1,7 @@
 export const podcast = {
 	nombre: 'La Catamazmorra',
 	lema: 'Cine, series y videojuegos desde el sótano',
+	x: 'https://x.com/catamazmorra',
 };
 
 // TODO: sustituir por las URL reales del podcast en cada plataforma
