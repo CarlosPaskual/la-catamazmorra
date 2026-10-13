@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+	const episodios = await getCollection('episodios');
+	return episodios.map((episodio) => ({
+		params: { id: episodio.id },
+		props: { episodio },
+	}));
+}
+
+const { episodio } = Astro.props;
+const { data } = episodio;
+const { Content } = await render(episodio);
+
+const fecha = data.fecha.toLocaleDateString('es-ES', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+	timeZone: 'UTC', // la fecha del frontmatter se lee como medianoche UTC
+});
+
+const obras = [
+	{ seccion: 'Cine', ...data.pelicula },
+	{ seccion: 'Series', ...data.serie },
+	{ seccion: 'Videojuegos', ...data.videojuego },
+];
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={data.descripcion} />
+		<title>{data.titulo} | La Catamazmorra</title>
+	</head>
+	<body>
+		<article>
+			<Image
+				src={data.portada}
+				alt={`Portada del episodio ${data.numero} de La Catamazmorra: ${data.titulo}`}
+				width={600}
+			/>
+
+			<h1>{data.titulo}</h1>
+			<p>Episodio {data.numero} · {fecha} · {data.duracion}</p>
+			<p>{data.descripcion}</p>
+
+			<audio controls preload="none" src={data.audio}></audio>
+
+			<h2>Capítulos</h2>
+			<ol>
+				{data.capitulos.map((capitulo) => (
+					<li>{capitulo.tiempo} · {capitulo.seccion}</li>
+				))}
+			</ol>
+
+			<h2>Obras</h2>
+			<ul>
+				{obras.map((obra) => (
+					<li>
+						<strong>{obra.seccion}:</strong> {obra.titulo} ({obra.anio}), de {obra.autor}
+						{obra.llaves && <span> · {obra.llaves} llaves</span>}
+					</li>
+				))}
+			</ul>
+
+			<h2>Editorial</h2>
+			<p>{data.editorial}</p>
+
+			<Content />
+		</article>
+	</body>
+</html>
