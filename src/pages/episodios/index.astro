@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TarjetaEpisodio from '../../components/TarjetaEpisodio.astro';
+
+// getCollection no garantiza orden: del más reciente al más antiguo
+const episodios = (await getCollection('episodios')).sort(
+	(a, b) => b.data.numero - a.data.numero,
+);
+---
+
+<Layout titulo="Episodios" descripcion="Todos los episodios de La Catamazmorra.">
+	<h1>Episodios</h1>
+	{episodios.map((episodio) => <TarjetaEpisodio episodio={episodio} />)}
+</Layout>
