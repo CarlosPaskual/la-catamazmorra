@@ -1,5 +1,6 @@
 ---
 import { podcast } from '../config';
+import '../styles/global.css';
 
 interface Props {
 	titulo?: string;
@@ -16,6 +17,12 @@ const { titulo, descripcion = podcast.lema } = Astro.props;
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={descripcion} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Creepster&family=Oswald:wght@400;600&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
 		<title>{titulo ? `${titulo} | ${podcast.nombre}` : podcast.nombre}</title>
 	</head>
 	<body>

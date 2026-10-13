@@ -1,0 +1,49 @@
+:root {
+	/* Colores */
+	--negro: #000000; /* barra del menú y pie */
+	--fondo: #141414; /* fondo de las páginas interiores */
+	--superficie: #1f1f1f; /* tarjetas y celda del reproductor */
+	--blanco: #ffffff; /* logo, menú, títulos */
+	--gris: #a6a6a6; /* fechas, duraciones, autores */
+	--rojo: #d7262e; /* solo para escuchar: botones y reproductor */
+
+	/* Tipografías */
+	--fuente-logo: 'Creepster', system-ui, sans-serif; /* solo el nombre del podcast */
+	--fuente-titulos: 'Oswald', 'Arial Narrow', sans-serif; /* menú y títulos */
+	--fuente-texto: 'Alegreya', Georgia, serif; /* textos largos */
+}
+
+/* Base */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--fondo);
+	color: var(--blanco);
+	font-family: var(--fuente-texto);
+	line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--fuente-titulos);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: var(--blanco);
+}
+
+:focus-visible {
+	outline: 2px solid var(--rojo);
+	outline-offset: 3px;
+}
