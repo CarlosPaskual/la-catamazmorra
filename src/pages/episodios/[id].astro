@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import { podcast } from '../../config';
 import { formatearFecha, formatearDuracion } from '../../utils/formato';
 
 export async function getStaticPaths() {
@@ -27,7 +28,7 @@ const obras = [
 	<article>
 		<Image
 			src={data.portada}
-			alt={`Portada del episodio ${data.numero} de La Catamazmorra: ${data.titulo}`}
+			alt={`Portada del episodio ${data.numero} de ${podcast.nombre}: ${data.titulo}`}
 			width={600}
 		/>
 

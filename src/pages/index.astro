@@ -1,16 +1,28 @@
 ---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import TarjetaEpisodio from '../components/TarjetaEpisodio.astro';
+import { podcast, plataformas } from '../config';
+import { obtenerEpisodios } from '../utils/episodios';
+import imagenCabecera from '../assets/mazmorra-provisional.svg'; // provisional
+
+const [ultimo] = await obtenerEpisodios();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<section>
+		<Image src={imagenCabecera} alt="" width={1200} loading="eager" />
+		<h1>{podcast.nombre}</h1>
+		<p>{podcast.lema}</p>
+		{ultimo && <a href={`/episodios/${ultimo.id}`}>Escuchar el último episodio</a>}
+	</section>
+
+	<ul aria-label="Escúchanos en">
+		{plataformas.map((plataforma) => (
+			<li><a href={plataforma.url}>{plataforma.nombre}</a></li>
+		))}
+	</ul>
+
+	<h2>Último episodio</h2>
+	{ultimo && <TarjetaEpisodio episodio={ultimo} />}
+</Layout>

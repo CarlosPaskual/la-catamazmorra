@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
+	<defs>
+		<pattern id="piedra" width="120" height="60" patternUnits="userSpaceOnUse">
+			<rect width="120" height="60" fill="#2b2622" />
+			<rect x="2" y="2" width="116" height="26" rx="3" fill="#3a332d" />
+			<rect x="-58" y="32" width="116" height="26" rx="3" fill="#36302a" />
+			<rect x="62" y="32" width="116" height="26" rx="3" fill="#36302a" />
+		</pattern>
+		<radialGradient id="luz" cx="50%" cy="45%" r="60%">
+			<stop offset="0" stop-color="#f2a33a" stop-opacity="0.35" />
+			<stop offset="1" stop-color="#000" stop-opacity="0.85" />
+		</radialGradient>
+	</defs>
+	<rect width="1200" height="500" fill="url(#piedra)" />
+	<path d="M480 500 V260 a120 120 0 0 1 240 0 V500 Z" fill="#0d0b0a" />
+	<path d="M300 360 h600 M300 400 h600" stroke="#1a1714" stroke-width="6" />
+	<rect width="1200" height="500" fill="url(#luz)" />
+</svg>
