@@ -8,6 +8,19 @@ interface Props {
 }
 
 const { titulo, descripcion = podcast.lema } = Astro.props;
+
+const enlaces = [
+	{ texto: 'Inicio', href: '/' },
+	{ texto: 'Episodios', href: '/episodios' },
+	{ texto: 'Sobre el podcast', href: '/sobre' },
+];
+
+// Inicio solo con la dirección exacta (todas empiezan por /); el resto también
+// en sus subpáginas, para que una ficha de episodio marque «Episodios»
+const ruta = Astro.url.pathname;
+function esActual(href: string) {
+	return href === '/' ? ruta === '/' : ruta.startsWith(href);
+}
 ---
 
 <html lang="es">
@@ -29,9 +42,13 @@ const { titulo, descripcion = podcast.lema } = Astro.props;
 		<header>
 			<nav>
 				<ul>
-					<li><a href="/">Inicio</a></li>
-					<li><a href="/episodios">Episodios</a></li>
-					<li><a href="/sobre">Sobre el podcast</a></li>
+					{enlaces.map((enlace) => (
+						<li>
+							<a href={enlace.href} aria-current={esActual(enlace.href) ? 'page' : undefined}>
+								{enlace.texto}
+							</a>
+						</li>
+					))}
 				</ul>
 			</nav>
 		</header>
@@ -45,3 +62,31 @@ const { titulo, descripcion = podcast.lema } = Astro.props;
 		</footer>
 	</body>
 </html>
+
+<style>
+	header {
+		background: var(--negro);
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 3rem;
+	}
+
+	a {
+		font-family: var(--fuente-titulos);
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	a[aria-current='page'],
+	a:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.4em;
+	}
+</style>
