@@ -26,6 +26,9 @@ body {
 	color: var(--blanco);
 	font-family: var(--fuente-texto);
 	line-height: 1.6;
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
 }
 
 h1,

@@ -1,6 +1,7 @@
 ---
 import { podcast } from '../config';
 import '../styles/global.css';
+import IconoX from '../icons/x.svg';
 
 interface Props {
 	titulo?: string;
@@ -14,6 +15,9 @@ const enlaces = [
 	{ texto: 'Episodios', href: '/episodios' },
 	{ texto: 'Sobre el podcast', href: '/sobre' },
 ];
+
+// Se calcula al generar la web, así que se actualiza en cada publicación
+const anio = new Date().getFullYear();
 
 // Inicio solo con la dirección exacta (todas empiezan por /); el resto también
 // en sus subpáginas, para que una ficha de episodio marque «Episodios»
@@ -58,7 +62,10 @@ function esActual(href: string) {
 		</main>
 
 		<footer>
-			<p>{podcast.nombre}</p>
+			<p>© {anio} {podcast.nombre}</p>
+			<a href={podcast.x} aria-label={`${podcast.nombre} en X`}>
+				<IconoX width={20} height={20} fill="currentColor" aria-hidden="true" />
+			</a>
 		</footer>
 	</body>
 </html>
@@ -78,15 +85,44 @@ function esActual(href: string) {
 		gap: 3rem;
 	}
 
-	a {
+	nav a {
 		font-family: var(--fuente-titulos);
 		text-decoration: none;
 		text-transform: uppercase;
 	}
 
-	a[aria-current='page'],
-	a:hover {
+	nav a[aria-current='page'],
+	nav a:hover {
 		text-decoration: underline;
 		text-underline-offset: 0.4em;
+	}
+
+	main {
+		flex: 1;
+	}
+
+	footer {
+		background: var(--negro);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.5rem;
+		margin-top: 3rem;
+		color: var(--gris);
+		font-size: 0.9rem;
+	}
+
+	footer p {
+		margin: 0;
+	}
+
+	footer a {
+		color: var(--gris);
+		display: flex;
+	}
+
+	footer a:hover {
+		color: var(--blanco);
 	}
 </style>
