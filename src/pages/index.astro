@@ -31,8 +31,12 @@ const [ultimo] = await obtenerEpisodios();
 		</ul>
 	</section>
 
-	<h2>Último episodio</h2>
-	{ultimo && <TarjetaEpisodio episodio={ultimo} />}
+	{ultimo && (
+		<div class="contenedor">
+			<h2>Último episodio</h2>
+			<TarjetaEpisodio episodio={ultimo} />
+		</div>
+	)}
 </Layout>
 
 <style>
@@ -71,15 +75,6 @@ const [ultimo] = await obtenerEpisodios();
 		font-weight: normal;
 		font-size: clamp(3rem, 9vw, 7rem);
 		margin: 0;
-	}
-
-	.boton {
-		background: var(--rojo);
-		padding: 0.75rem 1.5rem;
-		display: inline-block;
-		text-decoration: none;
-		font-family: var(--fuente-titulos);
-		text-transform: uppercase;
 	}
 
 	.portada ul {

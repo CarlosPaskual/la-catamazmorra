@@ -7,50 +7,52 @@ import { podcast } from '../config';
 	titulo="Sobre el podcast"
 	descripcion={`Qué es ${podcast.nombre}, cómo funciona cada episodio y quién hay detrás.`}
 >
-	<h1>Sobre el podcast</h1>
+	<div class="contenedor">
+		<h1>Sobre el podcast</h1>
 
-	<section>
-		<h2>Qué es {podcast.nombre}</h2>
-		<p>
-			{podcast.nombre} es un podcast de cine, series y videojuegos grabado desde el sótano. En cada
-			episodio bajamos a la mazmorra con una película, una serie y un videojuego, y no subimos hasta
-			haberlos desmenuzado.
-		</p>
-	</section>
+		<section>
+			<h2>Qué es {podcast.nombre}</h2>
+			<p>
+				{podcast.nombre} es un podcast de cine, series y videojuegos grabado desde el sótano. En cada
+				episodio bajamos a la mazmorra con una película, una serie y un videojuego, y no subimos hasta
+				haberlos desmenuzado.
+			</p>
+		</section>
 
-	<section>
-		<h2>Cómo funciona cada episodio</h2>
-		<p>La mazmorra tiene tres celdas, y en cada una encerramos una obra:</p>
-		<ul>
-			<li><strong>Cine:</strong> una película, reciente o rescatada del olvido.</li>
-			<li><strong>Series:</strong> una serie, terminada, en marcha o cancelada antes de tiempo.</li>
-			<li><strong>Videojuegos:</strong> un juego, de cualquier época y plataforma.</li>
-		</ul>
-		<p>
-			Cada obra recibe una nota en <strong>llaves, del 1 al 5</strong>. Cuantas más llaves, más fácil
-			le resulta salir de la celda; con una sola, se queda a oscuras una buena temporada.
-		</p>
-		<p>
-			Y al fondo de la mazmorra espera el <strong>editorial</strong>: un tema de debate que no
-			elegimos nosotros, sino los dados. Lo que salga, se discute.
-		</p>
-	</section>
+		<section>
+			<h2>Cómo funciona cada episodio</h2>
+			<p>La mazmorra tiene tres celdas, y en cada una encerramos una obra:</p>
+			<ul>
+				<li><strong>Cine:</strong> una película, reciente o rescatada del olvido.</li>
+				<li><strong>Series:</strong> una serie, terminada, en marcha o cancelada antes de tiempo.</li>
+				<li><strong>Videojuegos:</strong> un juego, de cualquier época y plataforma.</li>
+			</ul>
+			<p>
+				Cada obra recibe una nota en <strong>llaves, del 1 al 5</strong>. Cuantas más llaves, más fácil
+				le resulta salir de la celda; con una sola, se queda a oscuras una buena temporada.
+			</p>
+			<p>
+				Y al fondo de la mazmorra espera el <strong>editorial</strong>: un tema de debate que no
+				elegimos nosotros, sino los dados. Lo que salga, se discute.
+			</p>
+		</section>
 
-	<section>
-		<h2>Quién está detrás</h2>
-		<!-- PROVISIONAL: personalizar con tu presentación -->
-		<p>
-			Al otro lado del micrófono hay un carcelero con más horas de sofá, butaca y mando de las que
-			admitiría en público. Baja a la mazmorra cada episodio con una antorcha, una libreta y las
-			llaves colgando del cinturón.
-		</p>
-	</section>
+		<section>
+			<h2>Quién está detrás</h2>
+			<!-- PROVISIONAL: personalizar con tu presentación -->
+			<p>
+				Al otro lado del micrófono hay un carcelero con más horas de sofá, butaca y mando de las que
+				admitiría en público. Baja a la mazmorra cada episodio con una antorcha, una libreta y las
+				llaves colgando del cinturón.
+			</p>
+		</section>
 
-	<section>
-		<h2>Contacto</h2>
-		<p>
-			¿Quieres proponer una obra, discutir una nota o simplemente saludar? Escríbenos en
-			<a href={podcast.x}>X (@catamazmorra)</a>.
-		</p>
-	</section>
+		<section>
+			<h2>Contacto</h2>
+			<p>
+				¿Quieres proponer una obra, discutir una nota o simplemente saludar? Escríbenos en
+				<a href={podcast.x}>X (@catamazmorra)</a>.
+			</p>
+		</section>
+	</div>
 </Layout>

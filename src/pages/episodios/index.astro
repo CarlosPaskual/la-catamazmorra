@@ -8,6 +8,8 @@ const episodios = await obtenerEpisodios();
 ---
 
 <Layout titulo="Episodios" descripcion={`Todos los episodios de ${podcast.nombre}.`}>
-	<h1>Episodios</h1>
-	{episodios.map((episodio) => <TarjetaEpisodio episodio={episodio} />)}
+	<div class="contenedor">
+		<h1>Episodios</h1>
+		{episodios.map((episodio) => <TarjetaEpisodio episodio={episodio} />)}
+	</div>
 </Layout>

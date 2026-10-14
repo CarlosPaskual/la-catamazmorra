@@ -20,11 +20,52 @@ const enlace = `/episodios/${episodio.id}`;
 		width={300}
 	/>
 
-	<h2><a href={enlace}>{data.titulo}</a></h2>
-	<p>{formatearFecha(data.fecha)} · {formatearDuracion(data.duracion)}</p>
-	<p>{data.descripcion}</p>
-	<p>
-		Cine: {data.pelicula.titulo} · Series: {data.serie.titulo} · Videojuegos: {data.videojuego.titulo}
-	</p>
-	<a href={enlace} aria-label={`Escuchar ${data.titulo}`}>Escuchar</a>
+	<div>
+		<h2><a href={enlace}>{data.titulo}</a></h2>
+		<p class="detalle">{formatearFecha(data.fecha)} · {formatearDuracion(data.duracion)}</p>
+		<p>{data.descripcion}</p>
+		<p class="detalle">
+			Cine: {data.pelicula.titulo} · Series: {data.serie.titulo} · Videojuegos: {data.videojuego.titulo}
+		</p>
+		<a class="boton" href={enlace} aria-label={`Escuchar ${data.titulo}`}>Escuchar</a>
+	</div>
 </article>
+
+<style>
+	article {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 1.5rem;
+		background: var(--superficie);
+		padding: 1.5rem;
+	}
+
+	article :global(img) {
+		width: 100%;
+		height: auto;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+
+	h2 a {
+		color: var(--blanco);
+		text-decoration: none;
+	}
+
+	h2 a:hover {
+		text-decoration: underline;
+	}
+
+	.detalle {
+		color: var(--gris);
+		font-size: 0.9rem;
+	}
+
+	@media (max-width: 40rem) {
+		article {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
