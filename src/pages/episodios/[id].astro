@@ -25,39 +25,181 @@ const obras = [
 ---
 
 <Layout titulo={data.titulo} descripcion={data.descripcion}>
-	<article class="contenedor">
-		<Image
-			src={data.portada}
-			alt={`Portada del episodio ${data.numero} de ${podcast.nombre}: ${data.titulo}`}
-			width={600}
-		/>
+	<div class="contenedor">
+		<article>
+			<header class="cabecera">
+				<Image
+					src={data.portada}
+					alt={`Portada del episodio ${data.numero} de ${podcast.nombre}: ${data.titulo}`}
+					width={600}
+				/>
 
-		<h1>{data.titulo}</h1>
-		<p>Episodio {data.numero} · {formatearFecha(data.fecha)} · {formatearDuracion(data.duracion)}</p>
-		<p>{data.descripcion}</p>
+				<div>
+					<h1>{data.titulo}</h1>
+					<p class="detalle">
+						Episodio {data.numero} · {formatearFecha(data.fecha)} · {formatearDuracion(data.duracion)}
+					</p>
+					<p>{data.descripcion}</p>
+				</div>
+			</header>
 
-		<audio controls preload="none" src={data.audio}></audio>
+			<section class="reproductor">
+				<audio controls preload="none" src={data.audio}></audio>
 
-		<h2>Capítulos</h2>
-		<ol>
-			{data.capitulos.map((capitulo) => (
-				<li>{capitulo.tiempo} · {capitulo.seccion}</li>
-			))}
-		</ol>
+				<h2>Capítulos</h2>
+				<ol class="capitulos">
+					{data.capitulos.map((capitulo) => (
+						<li>
+							<button type="button" class="capitulo" data-tiempo={capitulo.tiempo}>
+								<span class="tiempo">{capitulo.tiempo}</span> <span class="seccion-capitulo">{capitulo.seccion}</span>
+							</button>
+						</li>
+					))}
+				</ol>
+			</section>
 
-		<h2>Obras</h2>
-		<ul>
-			{obras.map((obra) => (
-				<li>
-					<strong>{obra.seccion}:</strong> {obra.titulo} ({obra.anio}), de {obra.autor}
-					{obra.llaves && <span> · {obra.llaves} llaves</span>}
-				</li>
-			))}
-		</ul>
+			<section>
+				<h2>Obras</h2>
+				<div class="obras">
+					{obras.map((obra) => (
+						<article class="obra">
+							<p class="seccion">{obra.seccion}</p>
+							<h3>{obra.titulo}</h3>
+							<p class="detalle">{obra.anio} · {obra.autor}</p>
+							{obra.llaves && <p>{obra.llaves} {obra.llaves === 1 ? 'llave' : 'llaves'}</p>}
+						</article>
+					))}
+				</div>
+			</section>
 
-		<h2>Editorial</h2>
-		<p>{data.editorial}</p>
+			<section>
+				<h2>Editorial</h2>
+				<p>{data.editorial}</p>
+			</section>
 
-		<Content />
-	</article>
+			<div class="notas">
+				<Content />
+			</div>
+		</article>
+	</div>
 </Layout>
+
+<script>
+	// Capítulos: al pulsar uno, el reproductor salta a ese minuto
+	const audio = document.querySelector('audio');
+	const botones = document.querySelectorAll<HTMLButtonElement>('[data-tiempo]');
+
+	if (audio) {
+		botones.forEach((boton) => {
+			boton.addEventListener('click', () => {
+				const [minutos, segundos] = (boton.dataset.tiempo ?? '').split(':').map(Number);
+				audio.currentTime = minutos * 60 + segundos;
+				audio.play();
+			});
+		});
+	}
+</script>
+
+<style>
+	/* Cabecera: la misma rejilla que la tarjeta, sin fondo */
+	.cabecera {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 1.5rem;
+		margin-block: 2rem;
+	}
+
+	.cabecera :global(img) {
+		width: 100%;
+		height: auto;
+	}
+
+	.cabecera h1 {
+		margin-top: 0;
+	}
+
+	/* Bloques: todos con el mismo aire arriba y abajo */
+	section {
+		margin-block: 2.5rem;
+	}
+
+	@media (max-width: 40rem) {
+		.cabecera {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Reproductor: el borde rojo marca «aquí se escucha» */
+	.reproductor {
+		background: var(--superficie);
+		padding: 1.5rem;
+		border-left: 4px solid var(--rojo);
+	}
+
+	.reproductor audio {
+		width: 100%;
+	}
+
+	.reproductor h2 {
+		font-size: 1rem;
+		text-transform: uppercase;
+		color: var(--gris);
+		margin-bottom: 0.5rem;
+	}
+
+	.capitulos {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+	}
+
+	/* El capítulo es un botón, pero sin aspecto de botón */
+	.capitulo {
+		background: none;
+		border: 0;
+		padding: 0;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	.capitulo:hover .seccion-capitulo {
+		text-decoration: underline;
+	}
+
+	.tiempo {
+		color: var(--rojo-texto);
+		font-family: var(--fuente-titulos);
+	}
+
+	/* Obras: tantas columnas como quepan, sin media query */
+	.obras {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+		gap: 1.5rem;
+	}
+
+	.obra p,
+	.obra h3 {
+		margin: 0;
+	}
+
+	.obra .seccion {
+		color: var(--gris);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+	}
+
+	.obra h3 {
+		color: var(--blanco);
+		font-size: 1.4rem;
+	}
+
+	/* Texto libre: líneas de unos 70 caracteres */
+	.notas {
+		max-width: 70ch;
+	}
+</style>

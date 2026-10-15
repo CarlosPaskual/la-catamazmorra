@@ -5,7 +5,7 @@ descripcion: "Primer viaje a la mazmorra: Kitano de vacaciones, un western espac
 # PROVISIONAL: fecha, duracion, audio y el tiempo del editorial
 fecha: 2026-01-01
 duracion: "00:45:00"
-audio: "https://example.com/audio/01-kikujiro-firefly-monkey-island.mp3"
+audio: "http://localhost:4321/audio/prueba.mp3" # TEMPORAL: volver a la URL real antes de publicar
 portada: "../../assets/portadas/01-kikujiro-firefly-monkey-island.png"
 editorial: "¿Es falsa la lucha libre?"
 pelicula:

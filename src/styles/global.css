@@ -1,4 +1,6 @@
 :root {
+	color-scheme: dark; /* reproductor, barras de desplazamiento y formularios en oscuro */
+
 	/* Colores */
 	--negro: #000000; /* barra del menú y pie */
 	--fondo: #141414; /* fondo de las páginas interiores */
@@ -6,6 +8,7 @@
 	--blanco: #ffffff; /* logo, menú, títulos */
 	--gris: #a6a6a6; /* fechas, duraciones, autores */
 	--rojo: #d7262e; /* solo para escuchar: botones y reproductor */
+	--rojo-texto: #ff5a5f; /* el rojo como letra: contraste 5,4:1 sobre la superficie */
 
 	/* Tipografías */
 	--fuente-logo: 'Creepster', system-ui, sans-serif; /* solo el nombre del podcast */
@@ -69,4 +72,9 @@ a {
 
 .boton:hover {
 	filter: brightness(0.85);
+}
+
+.detalle {
+	color: var(--gris);
+	font-size: 0.9rem;
 }
