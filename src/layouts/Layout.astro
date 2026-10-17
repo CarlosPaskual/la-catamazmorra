@@ -63,6 +63,7 @@ function esActual(href: string) {
 
 		<footer>
 			<p>© {anio} {podcast.nombre}</p>
+			<a href={`mailto:${podcast.email}`}>{podcast.email}</a>
 			<a href={podcast.x} aria-label={`${podcast.nombre} en X`}>
 				<IconoX width={20} height={20} fill="currentColor" aria-hidden="true" />
 			</a>

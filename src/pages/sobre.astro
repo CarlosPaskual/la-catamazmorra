@@ -50,9 +50,22 @@ import { podcast } from '../config';
 		<section>
 			<h2>Contacto</h2>
 			<p>
-				¿Quieres proponer una obra, discutir una nota o simplemente saludar? Escríbenos en
+				¿Quieres proponer una obra, discutir una nota o simplemente saludar? Escríbenos a{' '}
+				<a href={`mailto:${podcast.email}`}>{podcast.email}</a> o en{' '}
 				<a href={podcast.x}>X (@catamazmorra)</a>.
 			</p>
 		</section>
 	</div>
 </Layout>
+
+<style>
+	h1,
+	h2 {
+		color: var(--rojo);
+	}
+
+	p,
+	li {
+		font-size: 1.125rem;
+	}
+</style>

@@ -4,16 +4,27 @@ import Layout from '../layouts/Layout.astro';
 import TarjetaEpisodio from '../components/TarjetaEpisodio.astro';
 import { podcast, plataformas } from '../config';
 import { obtenerEpisodios } from '../utils/episodios';
-import imagenCabecera from '../assets/mazmorra-provisional.svg'; // provisional
+import imagenCabecera from '../assets/mazmorra.jpg';
+import logo from '../assets/logo.png';
 
 const [ultimo] = await obtenerEpisodios();
 ---
 
 <Layout>
 	<section class="portada">
-		<Image src={imagenCabecera} alt="" width={1200} loading="eager" />
+		<Image
+			src={imagenCabecera}
+			alt=""
+			class="fondo"
+			width={1920}
+			widths={[800, 1200, 1920, 2560]}
+			sizes="100vw"
+			loading="eager"
+		/>
 		<div>
-			<h1>{podcast.nombre}</h1>
+			<h1>
+				<Image src={logo} alt={podcast.nombre} width={1000} densities={[1, 2]} loading="eager" />
+			</h1>
 			<p>{podcast.lema}</p>
 			{ultimo && <a class="boton" href={`/episodios/${ultimo.id}`}>Escuchar el último episodio</a>}
 		</div>
@@ -22,8 +33,9 @@ const [ultimo] = await obtenerEpisodios();
 				const Icono = plataforma.icono;
 				return (
 					<li>
-						<a href={plataforma.url} aria-label={`Escúchanos en ${plataforma.nombre}`}>
+						<a href={plataforma.url}>
 							<Icono width={30} height={30} fill="currentColor" aria-hidden="true" />
+							<span>{plataforma.nombre}</span>
 						</a>
 					</li>
 				);
@@ -49,7 +61,7 @@ const [ultimo] = await obtenerEpisodios();
 		padding: 2rem;
 	}
 
-	.portada :global(img) {
+	.fondo {
 		position: absolute;
 		inset: 0;
 		width: 100%;
@@ -71,10 +83,14 @@ const [ultimo] = await obtenerEpisodios();
 	}
 
 	h1 {
-		font-family: var(--fuente-logo);
-		font-weight: normal;
-		font-size: clamp(3rem, 9vw, 7rem);
 		margin: 0;
+	}
+
+	/* Logo: imagen dentro del h1, para buscadores sigue siendo el título */
+	h1 :global(img) {
+		display: block;
+		width: min(100%, 50rem);
+		height: auto;
 	}
 
 	.portada ul {
@@ -86,8 +102,18 @@ const [ultimo] = await obtenerEpisodios();
 	}
 
 	.portada ul a {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
 		color: var(--blanco);
 		text-decoration: none;
+	}
+
+	.portada ul span {
+		color: var(--rojo-texto);
+		font-size: 0.875rem;
+		text-transform: uppercase;
 	}
 
 	.portada ul a:hover {
